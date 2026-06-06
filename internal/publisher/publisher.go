@@ -9,7 +9,7 @@ import (
 	"log/slog"
 	"time"
 
-	rs "github.com/stuttgart-things/maschinist/resourceservice"
+	rs "github.com/stuttgart-things/machinery/resourceservice"
 	"google.golang.org/grpc"
 
 	"github.com/stuttgart-things/machinery-catalog-publisher/internal/entity"

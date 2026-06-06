@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	rs "github.com/stuttgart-things/maschinist/resourceservice"
+	rs "github.com/stuttgart-things/machinery/resourceservice"
 	"sigs.k8s.io/yaml"
 )
 

@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	rs "github.com/stuttgart-things/maschinist/resourceservice"
+	rs "github.com/stuttgart-things/machinery/resourceservice"
 )
 
 func sample() *rs.ResourceStatus {

@@ -14,33 +14,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # The publisher imports machinery's resourceservice stubs via a local
-  # `replace github.com/stuttgart-things/maschinist => ../machinery` (the
-  # maschinist module path doesn't yet match its repo, so it isn't go-gettable).
-  # Check both repos out as siblings so the replace resolves and tests run.
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          path: machinery-catalog-publisher
-      - uses: actions/checkout@v4
-        with:
-          repository: stuttgart-things/machinery
-          path: machinery
       - uses: actions/setup-go@v5
         with:
           go-version: "1.26"
       - name: vet + test
-        working-directory: machinery-catalog-publisher
         run: |
           go vet ./...
           go test ./...
 
-  # NOTE: the reusable ko-build template checks out only this repo, so it cannot
-  # see ../machinery. These jobs will go green once the maschinist module is
-  # published under a matching path (or its stubs are vendored here) and the
-  # local replace in go.mod is dropped. Wired now so it's ready on that day.
   build-pr:
     needs: test
     if: github.event_name == 'pull_request'

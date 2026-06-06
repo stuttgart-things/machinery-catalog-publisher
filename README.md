@@ -57,16 +57,16 @@ Two inputs, matching the deployment model:
 ## Run locally
 
 ```bash
-go mod tidy   # resolves deps; uses the local replace to ../machinery
 go test ./...
 CONFIG_FILE=examples/config.yaml \
   S3_ENDPOINT=https://minio.sthings.lab S3_ACCESS_KEY=... S3_SECRET_KEY=... \
   go run ./cmd/server
 ```
 
-> The `go.mod` has `replace github.com/stuttgart-things/maschinist => ../machinery` for the
-> sibling-repo layout. For image builds, tag/publish machinery or vendor its
-> `resourceservice/` package and drop the replace.
+> The gRPC stubs come from the [`machinery`](https://github.com/stuttgart-things/machinery)
+> module (`github.com/stuttgart-things/machinery/resourceservice`). The pin is currently a
+> pseudo-version of the module-path-rename commit; bump it to a tagged release once
+> [machinery#85](https://github.com/stuttgart-things/machinery/pull/85) merges and ships.
 
 ## Deploy (KCL)
 

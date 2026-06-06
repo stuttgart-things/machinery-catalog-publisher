@@ -9,7 +9,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	rs "github.com/stuttgart-things/maschinist/resourceservice"
+	rs "github.com/stuttgart-things/machinery/resourceservice"
 )
 
 // Client wraps a ResourceServiceClient and the kind selector to query.
