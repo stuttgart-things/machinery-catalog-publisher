@@ -1,0 +1,17 @@
+kcl_options:
+  - key: config.image
+    value: ghcr.io/stuttgart-things/machinery-catalog-publisher:latest
+  - key: config.namespace
+    value: machinery-catalog-publisher
+  - key: config.bucket
+    value: backstage-status
+  - key: config.connectionSecret
+    value: minio-homerun
+  - key: config.machineryAddr
+    value: machinery.machinery-system.svc:50051
+  - key: config.keyPrefix
+    value: status/
+  - key: config.layout
+    value: PerResource
+  - key: config.entityNamespace
+    value: default

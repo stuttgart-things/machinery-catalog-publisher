@@ -1,0 +1,20 @@
+---
+# When a PR is closed (merged or not), delete the `pr-<number>-*` tags
+# from ghcr for both the runtime image and the kustomize OCI artifact.
+# Keeps ghcr from accumulating per-PR cruft once the preview env is
+# torn down by Argo.
+name: Cleanup PR Artifacts
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  cleanup:
+    uses: stuttgart-things/github-workflow-templates/.github/workflows/call-cleanup-pr-artifacts.yaml@main
+    with:
+      runs-on: ubuntu-latest
+      packages: machinery-catalog-publisher,machinery-catalog-publisher-kustomize
+      dry-run: false
+    secrets: inherit # pragma: allowlist secret

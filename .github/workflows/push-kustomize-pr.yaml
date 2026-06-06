@@ -1,0 +1,28 @@
+---
+# Build + push a per-PR container image and kustomize OCI artifact, both
+# tagged `pr-<number>-<head_sha>`. The pr-preview ApplicationSet in
+# stuttgart-things/argocd (platforms/machinery-catalog-publisher-pr-preview)
+# consumes these tags via the apps/machinery-catalog-publisher install chart.
+#
+# Tag format matches `.head_sha` exposed by Argo's pullRequest generator,
+# so the AppSet can interpolate it verbatim without massaging the SHA.
+name: Push PR Kustomize OCI
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  push-kustomize:
+    uses: stuttgart-things/github-workflow-templates/.github/workflows/call-push-kustomize.yaml@main
+    with:
+      runs-on: ubuntu-latest
+      kcl-source-dir: kcl
+      kcl-profile-file: tests/kcl-deploy-profile.yaml
+      kustomize-oci-repo: ghcr.io/stuttgart-things/machinery-catalog-publisher-kustomize
+      tag: pr-${{ github.event.number }}-${{ github.event.pull_request.head.sha }}
+    secrets: inherit # pragma: allowlist secret
