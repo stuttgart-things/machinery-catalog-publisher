@@ -1,0 +1,15 @@
+# Non-secret publisher config. In-cluster this is mounted from a ConfigMap at
+# /etc/publisher/config.yaml (see kcl/configmap.k). Secret material (endpoint,
+# creds, CA) comes from the connection Secret via env — see connection-secret.yaml.
+interval: 5m
+owner: platform-team
+source:
+  machineryAddr: machinery.machinery-system.svc:50051
+  kinds:
+    - HarvesterVM
+    - VsphereVM
+sink:
+  bucket: backstage-status
+  keyPrefix: status/
+  layout: PerResource        # PerResource | Aggregate
+  entityNamespace: default

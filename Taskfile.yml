@@ -1,0 +1,74 @@
+version: "3"
+
+dotenv: [".env"]
+
+vars:
+  BIN: bin/machinery-catalog-publisher
+  IMAGE: ghcr.io/stuttgart-things/machinery-catalog-publisher
+
+tasks:
+  tidy:
+    desc: Resolve dependencies
+    cmds:
+      - go mod tidy
+
+  fmt:
+    desc: Format Go sources
+    cmds:
+      - gofmt -w .
+
+  vet:
+    desc: Static analysis
+    cmds:
+      - go vet ./...
+
+  test:
+    desc: Run unit tests
+    cmds:
+      - go test ./...
+
+  build:
+    desc: Build the publisher binary
+    cmds:
+      - go build -o {{.BIN}} ./cmd/server
+
+  run:
+    desc: Run the publisher against a local config + S3 connection (set S3_* in .env)
+    summary: |
+      Reads CONFIG_FILE (default examples/config.yaml) and the S3_* connection
+      vars (from .env via dotenv). Streams machinery status and publishes to S3.
+
+        cp .env.example .env   # then fill in S3_ENDPOINT / keys
+        task run
+    env:
+      CONFIG_FILE: '{{.CONFIG_FILE | default "examples/config.yaml"}}'
+    cmds:
+      - go run ./cmd/server
+
+  render:
+    desc: Render the KCL deployment manifests
+    summary: |
+      Renders kcl/ to stdout. bucket + connectionSecret are required by the
+      schema check.
+
+        task render BUCKET=backstage-status SECRET=minio-homerun
+    cmds:
+      - kcl run kcl/ -D config.bucket={{.BUCKET}} -D config.connectionSecret={{.SECRET}}
+
+  image:
+    desc: Build + push the container image with ko
+    summary: |
+      Requires machinery resolvable for the local replace (../machinery) until
+      the maschinist module is published under a matching path.
+    env:
+      KO_DOCKER_REPO: '{{.IMAGE}}'
+    cmds:
+      - ko build ./cmd/server --bare
+
+  ci:
+    desc: tidy + fmt + vet + test
+    cmds:
+      - task: tidy
+      - task: fmt
+      - task: vet
+      - task: test
