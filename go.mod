@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.28.6
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.47
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.71.0
-	github.com/stuttgart-things/machinery v1.13.4-0.20260606054802-4a49e5df4835
+	github.com/stuttgart-things/machinery v1.13.4
 	google.golang.org/grpc v1.81.1
 	sigs.k8s.io/yaml v1.6.0
 )
