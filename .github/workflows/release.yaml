@@ -37,4 +37,7 @@ jobs:
       kcl-source-dir: kcl
       kcl-profile-file: tests/kcl-deploy-profile.yaml
       kustomize-oci-repo: ghcr.io/stuttgart-things/machinery-catalog-publisher-kustomize
+      # Pin the pushed kustomize base to the released image (ghcr.io/<repo>:<version>)
+      # instead of the profile's :latest, which isn't published.
+      kustomize-image-key: config.image
     secrets: inherit # pragma: allowlist secret
