@@ -1,0 +1,43 @@
+---
+# GoReleaser config for the release pipeline (call-go-release.yaml).
+# Unlike clusterbook (main.go at repo root, default config), this project's
+# entrypoint lives under ./cmd/server, so the build must point there
+# explicitly or GoReleaser fails to find a main package.
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: machinery-catalog-publisher
+    main: ./cmd/server
+    binary: machinery-catalog-publisher
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      # cmd/server/main.go declares main.version/commit/date.
+      - -s -w
+      - -X main.version={{ .Version }}
+      - -X main.commit={{ .Commit }}
+      - -X main.date={{ .Date }}
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - formats: [tar.gz]
+    name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  disable: true

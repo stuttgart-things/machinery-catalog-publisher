@@ -1,17 +1,16 @@
-kcl_options:
-  - key: config.image
-    value: ghcr.io/stuttgart-things/machinery-catalog-publisher:latest
-  - key: config.namespace
-    value: machinery-catalog-publisher
-  - key: config.bucket
-    value: backstage-status
-  - key: config.connectionSecret
-    value: minio-homerun
-  - key: config.machineryAddr
-    value: machinery.machinery-system.svc:50051
-  - key: config.keyPrefix
-    value: status/
-  - key: config.layout
-    value: PerResource
-  - key: config.entityNamespace
-    value: default
+---
+# Deploy profile consumed by the dagger kcl module (call-push-kustomize /
+# call-go-release) as --parameters-file. The module flattens this map into a
+# KCL settings file (kcl_options:) via `yq ... to_entries`, so it MUST be a
+# flat `config.<key>: <value>` map — NOT a `kcl_options:` list. A list form
+# gets wrapped under a single bogus `kcl_options` key and none of the values
+# reach the option() calls in labels.k, which then trips the schema checks
+# (e.g. "bucket must not be empty").
+config.image: ghcr.io/stuttgart-things/machinery-catalog-publisher:latest
+config.namespace: machinery-catalog-publisher
+config.bucket: backstage-status
+config.connectionSecret: minio-homerun
+config.machineryAddr: machinery.machinery-system.svc:50051
+config.keyPrefix: status/
+config.layout: PerResource
+config.entityNamespace: default
