@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/stuttgart-things/machinery-catalog-publisher/compare/v0.1.0...v0.1.1) (2026-06-08)
+
+
+### Bug Fixes
+
+* **deps:** update aws-sdk-go-v2 monorepo ([#6](https://github.com/stuttgart-things/machinery-catalog-publisher/issues/6)) ([483b7b1](https://github.com/stuttgart-things/machinery-catalog-publisher/commit/483b7b1a8d4bfd5061ac812f007cd76c1d54bc1e))
+
 # [0.1.0](https://github.com/stuttgart-things/machinery-catalog-publisher/compare/v0.0.0...v0.1.0) (2026-06-08)
 
 
