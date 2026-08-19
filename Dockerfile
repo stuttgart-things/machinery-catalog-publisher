@@ -1,7 +1,7 @@
 # Build the publisher. Note: the module imports machinery (module "maschinist")
 # via a local replace to ../machinery, so the build context must include both
 # repos, OR machinery must be published/vendored and the replace removed.
-FROM golang:1.26 AS build
+FROM golang:1.27 AS build
 WORKDIR /src
 
 # Expect both repos under the build context: ./machinery and ./machinery-catalog-publisher
