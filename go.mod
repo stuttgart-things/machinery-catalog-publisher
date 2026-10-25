@@ -1,14 +1,14 @@
 module github.com/stuttgart-things/machinery-catalog-publisher
 
-go 1.26.0
+go 1.27.3
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.42.0
 	github.com/aws/aws-sdk-go-v2/config v1.32.24
 	github.com/aws/aws-sdk-go-v2/credentials v1.19.23
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.103.3
-	github.com/stuttgart-things/machinery v1.13.4
-	google.golang.org/grpc v1.81.1
+	github.com/stuttgart-things/machinery v1.17.0
+	google.golang.org/grpc v1.84.0
 	sigs.k8s.io/yaml v1.6.0
 )
 
@@ -29,11 +29,11 @@ require (
 	github.com/aws/smithy-go v1.27.1 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
-	go.yaml.in/yaml/v2 v2.4.3 // indirect
-	golang.org/x/net v0.51.0 // indirect
-	golang.org/x/sys v0.42.0 // indirect
-	golang.org/x/text v0.34.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260226221140-a57be14db171 // indirect
-	google.golang.org/protobuf v1.36.12-0.20260120151049-f2248ac996af // indirect
+	go.yaml.in/yaml/v2 v2.4.4 // indirect
+	golang.org/x/net v0.58.0 // indirect
+	golang.org/x/sys v0.47.0 // indirect
+	golang.org/x/text v0.41.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260706201446-f0a921348800 // indirect
+	google.golang.org/protobuf v1.36.12 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )
