@@ -24,7 +24,7 @@ jobs:
     if: |
       (github.event.action == 'labeled' && github.event.label.name == 'preview') ||
       (github.event.action == 'reopened' && contains(github.event.pull_request.labels.*.name, 'preview'))
-    uses: stuttgart-things/github-workflow-templates/.github/workflows/call-comment-preview-url.yaml@main
+    uses: stuttgart-things/github-workflow-templates/.github/workflows/call-comment-preview-url.yaml@15bb803fd72658fda50120f8a566d5594061e6ee # v1.2.0
     with:
       hostname-prefix: machinery-catalog-publisher-pr
       hostname-domain: homerun2-dev.sthings-vsphere.labul.sva.de
